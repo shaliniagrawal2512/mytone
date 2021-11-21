@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "386194568380",
+    "project_id": "mytone-10117",
+    "storage_bucket": "mytone-10117.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386194568380:android:898a2688c9308226954cb9",
+        "android_client_info": {
+          "package_name": "com.example.mytone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386194568380-h8jkkp2l7cs3eiav43lmaj5i87oj8oa8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mytone",
+            "certificate_hash": "ae34a7c50ccf7bc85d3d39183febf1f9e7a6656e"
+          }
+        },
+        {
+          "client_id": "386194568380-jourb59tk5rptl4icusdbvil041bebsj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6BFEZZ4zMWilx_kuueDebnO9CwrvS16E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386194568380-jourb59tk5rptl4icusdbvil041bebsj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mytone/components/raised_buttons.dart';
+import 'package:mytone/screens/BottomNavigation.dart';
 import 'package:mytone/screens/login_screen.dart';
-import 'package:mytone/components/textfield.dart';
 import 'package:mytone/constants.dart';
-import 'package:mytone/screens/homeScreen.dart';
 
 class RegistrationScreen extends StatelessWidget {
   final Widget space2 = SizedBox(height: 20);
@@ -23,23 +22,40 @@ class RegistrationScreen extends StatelessWidget {
               style: kHeaderTextStyle,
             ),
             SizedBox(height: 20.0),
-            TextInputField(
-              label: 'Username',
-              obscure: false,
-              prefixIcon: Icons.account_circle,
+            TextField(
+              decoration: kInputDecoration.copyWith(
+                  hintText: 'Enter User Name',
+                  prefixIcon: Icon(
+                    Icons.account_circle,
+                    color: Colors.grey,
+                  )),
             ),
-            TextInputField(
-              label: 'Enter Email ID',
-              obscure: false,
-              prefixIcon: Icons.email,
+            SizedBox(height: 10.0),
+            TextField(
+              decoration: kInputDecoration.copyWith(
+                  hintText: 'Enter Email Address',
+                  prefixIcon: Icon(
+                    Icons.email,
+                    color: Colors.grey,
+                  )),
               keyboardType: TextInputType.emailAddress,
             ),
-            TextInputField(
-              label: 'Create a Password',
-              obscure: true,
-              prefixIcon: Icons.lock,
-              suffixIcon: Icons.remove_red_eye_sharp,
-              onPressed: () {},
+            SizedBox(height: 10.0),
+            TextField(
+              decoration: kInputDecoration.copyWith(
+                  hintText: 'Enter Password',
+                  prefixIcon: Icon(Icons.lock, color: Colors.grey),
+                  suffixIcon: IconTheme(
+                      data: IconThemeData(color: Colors.white),
+                      child: IconButton(
+                        disabledColor: Colors.grey,
+                        icon: Icon(
+                          Icons.visibility,
+                          color: Colors.grey,
+                        ),
+                        onPressed: () {},
+                      ))),
+              obscureText: true,
             ),
             SizedBox(height: 20.0),
             RaisedGradientButton(
@@ -50,7 +66,9 @@ class RegistrationScreen extends StatelessWidget {
                 label: 'Create Account',
                 icon: Icons.app_registration,
                 onPressed: () {
-                  Navigator.pushNamed(context, HomeScreen.id);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return BottomNavigation();
+                  }));
                 }),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

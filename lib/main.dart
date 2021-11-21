@@ -6,8 +6,12 @@ import 'screens/login_screen.dart';
 import 'screens/phonenum_screen.dart';
 import 'screens/music_player_screen.dart';
 import 'screens/searchScreen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 

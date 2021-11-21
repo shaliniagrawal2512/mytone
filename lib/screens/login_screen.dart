@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mytone/constants.dart';
 import 'package:mytone/components/raised_buttons.dart';
-import 'package:mytone/components/textfield.dart';
 import 'registration_screen.dart';
-import 'music_player_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String id = 'login_screen';
@@ -22,19 +20,33 @@ class LoginScreen extends StatelessWidget {
               style: kHeaderTextStyle,
             ),
             SizedBox(height: 20.0),
-            TextInputField(
-              label: 'Enter Email ID',
-              obscure: false,
-              prefixIcon: Icons.email,
+            TextField(
+              decoration: kInputDecoration.copyWith(
+                  hintText: 'Enter Email Address',
+                  prefixIcon: Icon(
+                    Icons.email,
+                    color: Colors.grey,
+                  )),
               keyboardType: TextInputType.emailAddress,
             ),
-            TextInputField(
-              label: 'Enter a Password',
-              obscure: true,
-              prefixIcon: Icons.lock,
-              suffixIcon: Icons.remove_red_eye_sharp,
-              onPressed: () {},
+            SizedBox(
+              height: 20,
             ),
+            TextField(
+                obscureText: true,
+                decoration: kInputDecoration.copyWith(
+                    hintText: 'Enter Password',
+                    prefixIcon: Icon(Icons.lock, color: Colors.grey),
+                    suffixIcon: IconTheme(
+                        data: IconThemeData(color: Colors.white),
+                        child: IconButton(
+                          disabledColor: Colors.grey,
+                          icon: Icon(
+                            Icons.visibility,
+                            color: Colors.grey,
+                          ),
+                          onPressed: () {},
+                        )))),
             TextButton(
                 onPressed: () {},
                 style: TextButton.styleFrom(
@@ -45,16 +57,10 @@ class LoginScreen extends StatelessWidget {
                 child: Text(
                   'Forget Password',
                 )),
-            RaisedGradientButton(
-                color: [
-                  Color(0xFFF9287B),
-                  Color(0xFF7E1CEA),
-                ],
-                label: 'Log in',
-                icon: Icons.login_rounded,
-                onPressed: () {
-                  Navigator.pushNamed(context, MusicPlayer.id);
-                }),
+            RaisedGradientButton(color: [
+              Color(0xFFF9287B),
+              Color(0xFF7E1CEA),
+            ], label: 'Log in', icon: Icons.login_rounded, onPressed: () {}),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

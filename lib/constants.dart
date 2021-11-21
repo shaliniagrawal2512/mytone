@@ -6,12 +6,21 @@ const kBackgroundColor = Color(0xFF27153E);
 const kHeaderTextStyle =
     TextStyle(fontSize: 50.0, color: Colors.white, fontWeight: FontWeight.bold);
 
-const kInputDecorationStyle = InputDecoration(
+const kSubHeaderTextStyle =
+    TextStyle(fontSize: 40.0, color: Colors.white, fontWeight: FontWeight.bold);
+
+const kSubHeader2TextStyle =
+    TextStyle(fontSize: 30.0, color: Colors.white, fontWeight: FontWeight.bold);
+
+const kInputDecoration = InputDecoration(
+// filled: true,
+// fillColor: Colors.red,
+// focusColor: Colors.blue,
   prefixIcon: IconTheme(
-    data: IconThemeData(color: Colors.white),
+    data: IconThemeData(color: Colors.grey),
     child: Icon(Icons.add),
   ),
-  hintText: 'Enter a value.',
+  hintText: 'Enter a Value',
   hintStyle: TextStyle(),
   contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
   border: OutlineInputBorder(
