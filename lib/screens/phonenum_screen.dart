@@ -1,11 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mytone/constants.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:mytone/components/raised_buttons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mytone/screens/BottomNavigation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+TextEditingController phoneController = TextEditingController();
+TextEditingController otpController = TextEditingController();
+TextEditingController usernameController = TextEditingController();
+bool showSpinner = false;
+String countryCode = '+91';
+final _formKey = GlobalKey<FormState>();
 enum PhoneNumScreen { SHOW_MOBILE_ENTER_WIDGET, SHOW_OTP_FORM_WIDGET }
 
 class PhoneScreen extends StatefulWidget {
@@ -16,9 +24,6 @@ class PhoneScreen extends StatefulWidget {
 }
 
 class _PhoneScreenState extends State<PhoneScreen> {
-  TextEditingController phoneController = TextEditingController();
-  TextEditingController otpController = TextEditingController();
-  TextEditingController usernameController = TextEditingController();
   PhoneNumScreen currentState = PhoneNumScreen.SHOW_MOBILE_ENTER_WIDGET;
   FirebaseAuth _auth = FirebaseAuth.instance;
   String verificationID = "";
@@ -32,11 +37,21 @@ class _PhoneScreenState extends State<PhoneScreen> {
       final authCred = await _auth.signInWithCredential(phoneAuthCredential);
 
       if (authCred.user != null) {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return BottomNavigation();
-        }));
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('phoneNumber', phoneController.text);
+        Navigator.of(context, rootNavigator: true).pop();
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => BottomNavigation()));
+        setState(() {
+          showSpinner = false;
+        });
       }
     } on FirebaseAuthException catch (e) {
+      setState(() {
+        showSpinner = false;
+      });
       print(e.message);
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Some Error Occurred. Try Again Later')));
@@ -46,66 +61,78 @@ class _PhoneScreenState extends State<PhoneScreen> {
   Widget showMobilePhoneWidget(context) {
     return Padding(
       padding: const EdgeInsets.all(30.0),
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Get Started..',
-              style: kHeaderTextStyle,
-            ),
-            SizedBox(height: 20.0),
-            TextField(
-              controller: usernameController,
-              decoration: kInputDecoration.copyWith(
-                hintText: 'Enter User Name',
-                prefixIcon: Icon(Icons.account_circle, color: Colors.grey),
+      child: Form(
+        key: _formKey,
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Get Started..',
+                style: kHeaderTextStyle,
               ),
-            ),
-            SizedBox(height: 20),
-            Container(
-              padding: EdgeInsets.all(8),
-              height: 50,
-              decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white),
-                  borderRadius: BorderRadius.all(Radius.circular(18))),
-              child: IntlPhoneField(
+              SizedBox(height: 20.0),
+              TextFormField(
+                controller: usernameController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Username can\'t be null';
+                  } else if (value.length <= 3) {
+                    return 'Please Enter more than 3 characters';
+                  }
+                  return null;
+                },
+                decoration: kInputDecoration.copyWith(
+                    hintText: 'Enter User Name',
+                    prefixIcon: Icon(
+                      Icons.account_circle,
+                    )),
+              ),
+              SizedBox(height: 20),
+              IntlPhoneField(
                 controller: phoneController,
                 showDropdownIcon: false,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.zero,
-                  hintText: 'Enter phone number',
-                  border: InputBorder.none,
-                ),
                 initialCountryCode: 'IN',
-                onChanged: (phone) {},
+                onCountryChanged: (value) {
+                  countryCode = value.countryCode.toString();
+                },
+                decoration:
+                    kInputDecoration.copyWith(hintText: "Enter a Phone Number"),
               ),
-            ),
-            SizedBox(height: 20.0),
-            RaisedGradientButton(
-              color: [
-                Color(0xFFF9287B),
-                Color(0xFF7E1CEA),
-              ],
-              label: 'Generate OTP',
-              icon: Icons.navigate_next,
-              onPressed: () async {
-                await _auth.verifyPhoneNumber(
-                    phoneNumber: "+91${phoneController.text}",
-                    verificationCompleted: (phoneAuthCredential) async {},
-                    verificationFailed: (verificationFailed) {
-                      print(verificationFailed);
-                    },
-                    codeSent: (verificationID, resendingToken) async {
+              SizedBox(height: 20.0),
+              RaisedGradientButton(
+                  color: [
+                    Color(0xFFF9287B),
+                    Color(0xFF7E1CEA),
+                  ],
+                  label: 'Generate OTP',
+                  icon: Icons.navigate_next,
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
                       setState(() {
-                        currentState = PhoneNumScreen.SHOW_OTP_FORM_WIDGET;
-                        this.verificationID = verificationID;
+                        showSpinner = true;
                       });
-                    },
-                    codeAutoRetrievalTimeout: (verificationID) async {});
-              },
-            ),
-          ]),
+                      await _auth.verifyPhoneNumber(
+                          phoneNumber: "$countryCode${phoneController.text}",
+                          verificationCompleted: (phoneAuthCredential) async {},
+                          verificationFailed: (verificationFailed) {
+                            print(verificationFailed);
+                          },
+                          codeSent: (verificationID, resendingToken) async {
+                            setState(() {
+                              currentState =
+                                  PhoneNumScreen.SHOW_OTP_FORM_WIDGET;
+                              this.verificationID = verificationID;
+                            });
+                          },
+                          codeAutoRetrievalTimeout: (verificationID) async {});
+                      setState(() {
+                        showSpinner = false;
+                      });
+                    }
+                  }),
+            ]),
+      ),
     );
   }
 
@@ -132,17 +159,14 @@ class _PhoneScreenState extends State<PhoneScreen> {
               height: 20,
             ),
             TextField(
-              style: TextStyle(color: Colors.white),
-              controller: otpController,
-              keyboardType: TextInputType.number,
-              decoration: kInputDecoration.copyWith(
+                controller: otpController,
+                keyboardType: TextInputType.number,
+                decoration: kInputDecoration.copyWith(
                   prefixIcon: Icon(
                     Icons.refresh,
-                    color: Colors.grey,
                   ),
                   hintText: "Enter Your OTP",
-                  hintStyle: TextStyle(color: Colors.grey)),
-            ),
+                )),
             SizedBox(
               height: 10,
             ),
@@ -154,6 +178,9 @@ class _PhoneScreenState extends State<PhoneScreen> {
                 ],
                 label: 'Verify',
                 onPressed: () {
+                  setState(() {
+                    showSpinner = true;
+                  });
                   AuthCredential phoneAuthCredential =
                       PhoneAuthProvider.credential(
                           verificationId: verificationID,
@@ -168,9 +195,12 @@ class _PhoneScreenState extends State<PhoneScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      body: currentState == PhoneNumScreen.SHOW_MOBILE_ENTER_WIDGET
-          ? showMobilePhoneWidget(context)
-          : showOtpFormWidget(context),
+      body: ModalProgressHUD(
+        inAsyncCall: showSpinner,
+        child: currentState == PhoneNumScreen.SHOW_MOBILE_ENTER_WIDGET
+            ? showMobilePhoneWidget(context)
+            : showOtpFormWidget(context),
+      ),
     );
   }
 }

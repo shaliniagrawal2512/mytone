@@ -26,12 +26,10 @@ class RaisedGradientButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(18.0),
             )),
         gradient: LinearGradient(colors: color),
-        icon: Icon(icon),
+        icon: Icon(icon, color: Colors.white),
         label: Text(
           label,
-          style: TextStyle(
-            fontSize: 16.0,
-          ),
+          style: TextStyle(fontSize: 16.0, color: Colors.white),
         ),
         onPressed: onPressed as void Function()?,
       ),

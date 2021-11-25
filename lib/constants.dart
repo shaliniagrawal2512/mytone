@@ -13,15 +13,16 @@ const kSubHeader2TextStyle =
     TextStyle(fontSize: 30.0, color: Colors.white, fontWeight: FontWeight.bold);
 
 const kInputDecoration = InputDecoration(
-// filled: true,
-// fillColor: Colors.red,
-// focusColor: Colors.blue,
-  prefixIcon: IconTheme(
-    data: IconThemeData(color: Colors.grey),
-    child: Icon(Icons.add),
+  errorStyle: TextStyle(color: Color(0xFFF9287B), fontSize: 15),
+  errorBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: Color(0xFF7E1CEA), width: 1.0),
+    borderRadius: BorderRadius.all(Radius.circular(18.0)),
+  ),
+  focusedErrorBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: Color(0xFF7E1CEA), width: 2.0),
+    borderRadius: BorderRadius.all(Radius.circular(18.0)),
   ),
   hintText: 'Enter a Value',
-  hintStyle: TextStyle(),
   contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
   border: OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(18.0)),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gradient_ui_widgets/gradient_ui_widgets.dart';
 
 class SearchField extends StatelessWidget {
   @override
