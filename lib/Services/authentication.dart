@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Authenticate {
   Future<String> signInWithEmail(String email, String password) async {
@@ -45,5 +46,12 @@ class Authenticate {
       }
     }
     return 'Check your internet connection or try again later';
+  }
+
+  Future<void> logOut() async {
+    await FirebaseAuth.instance.signOut();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('email');
+    prefs.remove('phoneNumber');
   }
 }

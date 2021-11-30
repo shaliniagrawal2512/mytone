@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mytone/components/miniPlayer.dart';
 import 'package:mytone/constants.dart';
@@ -7,6 +6,7 @@ import 'package:mytone/screens/homeScreen.dart';
 import 'package:mytone/screens/Library.dart';
 import 'package:mytone/screens/profile.dart';
 import 'package:gradient_ui_widgets/gradient_ui_widgets.dart';
+import 'package:mytone/screens/slideSheet.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class BottomNavigation extends StatefulWidget {
@@ -70,13 +70,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
+        drawer: NavigationDrawer(),
         backgroundColor: kBackgroundColor,
         appBar: AppBar(
           centerTitle: true,
-          leading: IconButton(
-            icon: Icon(Icons.menu_sharp),
-            onPressed: () {},
-          ),
           title: GradientText(
             "MyTone",
             gradient: LinearGradient(

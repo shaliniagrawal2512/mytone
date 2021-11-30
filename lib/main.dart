@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mytone/screens/BottomNavigation.dart';
 import 'package:mytone/screens/Forget_Password.dart';
+import 'package:mytone/screens/Settings.dart';
+import 'package:mytone/screens/about.dart';
+import 'package:mytone/screens/downloads.dart';
+import 'package:mytone/screens/header.dart';
 import 'package:mytone/screens/homeScreen.dart';
+import 'package:mytone/screens/music_library.dart';
 import 'package:mytone/screens/top_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'screens/playlist.dart';
 import 'screens/registration_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/phonenum_screen.dart';
@@ -22,7 +28,6 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   MyApp({this.phoneNumber, this.email});
   final email;
   final phoneNumber;
@@ -51,6 +56,12 @@ class MyApp extends StatelessWidget {
         SearchScreen.id: (context) => SearchScreen(),
         BottomNavigation.id: (context) => BottomNavigation(),
         ForgotPassword.id: (context) => ForgotPassword(),
+        Settings.id: (context) => Settings(),
+        MusicLibrary.id: (context) => MusicLibrary(),
+        About.id: (context) => About(),
+        Downloads.id: (context) => Downloads(),
+        Header.id: (context) => Header(),
+        PlayList.id: (context) => PlayList()
       },
     );
   }
