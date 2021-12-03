@@ -3,6 +3,7 @@ import 'package:mytone/screens/BottomNavigation.dart';
 import 'package:mytone/screens/Forget_Password.dart';
 import 'package:mytone/screens/Settings.dart';
 import 'package:mytone/screens/about.dart';
+import 'package:mytone/screens/changePassword.dart';
 import 'package:mytone/screens/downloads.dart';
 import 'package:mytone/screens/header.dart';
 import 'package:mytone/screens/homeScreen.dart';
@@ -61,7 +62,8 @@ class MyApp extends StatelessWidget {
         About.id: (context) => About(),
         Downloads.id: (context) => Downloads(),
         Header.id: (context) => Header(),
-        PlayList.id: (context) => PlayList()
+        PlayList.id: (context) => PlayList(),
+        ChangePassword.id: (context) => ChangePassword()
       },
     );
   }

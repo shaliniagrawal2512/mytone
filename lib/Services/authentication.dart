@@ -54,4 +54,9 @@ class Authenticate {
     prefs.remove('email');
     prefs.remove('phoneNumber');
   }
+
+  Future<void> updateUserPassword(String password) async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    await currentUser!.updatePassword(password);
+  }
 }
