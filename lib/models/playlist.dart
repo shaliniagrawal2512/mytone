@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'package:flutter/material.dart';
 
 class Playlist {
@@ -14,8 +13,8 @@ class PlayListAdd extends ChangeNotifier {
     return _playList.length;
   }
 
-  UnmodifiableListView<Playlist> get allPlayLists {
-    return UnmodifiableListView(_playList);
+  List<Playlist> get allPlayLists {
+    return _playList;
   }
 
   void addNewPlayList(String title) {
@@ -25,6 +24,11 @@ class PlayListAdd extends ChangeNotifier {
 
   void removePlaylist(Playlist play) {
     _playList.remove(play);
+    notifyListeners();
+  }
+
+  void renamePlaylist(Playlist play, String value) {
+    play.title = value;
     notifyListeners();
   }
 }

@@ -42,11 +42,14 @@ class MiniPlayer extends StatelessWidget {
                     onPressed: () {}, icon: Icon(Icons.skip_next, size: 30)),
               ],
             ),
-            CustomSlider(
-              inactiveTrackHeight: 2,
-              thumbIconSize: 5,
-              trackHeight: 2.5,
-              handlerHeight: 8,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: CustomSlider(
+                inactiveTrackHeight: 2,
+                thumbIconSize: 5,
+                trackHeight: 2.5,
+                handlerHeight: 8,
+              ),
             )
           ],
         ),

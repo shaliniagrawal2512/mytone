@@ -6,11 +6,33 @@ import 'package:mytone/screens/downloads.dart';
 import 'package:mytone/screens/header.dart';
 import 'package:mytone/screens/music_library.dart';
 import 'package:mytone/screens/playlist.dart';
-
-import 'Settings.dart';
 import 'about.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class NavigationDrawer extends StatelessWidget {
+class NavigationDrawer extends StatefulWidget {
+  @override
+  State<NavigationDrawer> createState() => _NavigationDrawerState();
+}
+
+class _NavigationDrawerState extends State<NavigationDrawer> {
+  String? emailPhone;
+  String? name;
+  @override
+  initState() {
+    super.initState();
+    getDetails();
+  }
+
+  Future<void> getDetails() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getString('email') != null)
+      emailPhone = prefs.getString('email');
+    else
+      emailPhone = emailPhone = prefs.getString('phoneNumber');
+    name = prefs.getString('name');
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -22,9 +44,9 @@ class NavigationDrawer extends StatelessWidget {
             children: [
               buildHeader(
                   urlImage: 'images/music5.jpeg',
-                  name: 'Shalini',
-                  email: 'shanu@gmail.com',
-                  onClicked: () => selectedItem(context, 6)),
+                  name: '$name',
+                  email: '$emailPhone',
+                  onClicked: () => selectedItem(context, 5)),
               drawerItem(
                   selected: true,
                   icon: Icons.home,
@@ -49,15 +71,10 @@ class NavigationDrawer extends StatelessWidget {
                   label: "Playlists",
                   onClicked: () => selectedItem(context, 3)),
               drawerItem(
-                  icon: Icons.settings,
-                  label: "Settings",
-                  selected: false,
-                  onClicked: () => selectedItem(context, 4)),
-              drawerItem(
                   selected: false,
                   icon: Icons.info,
                   label: "About",
-                  onClicked: () => selectedItem(context, 5))
+                  onClicked: () => selectedItem(context, 4))
             ]),
       ),
     );
@@ -98,12 +115,9 @@ void selectedItem(BuildContext context, int index) {
       Navigator.pushNamed(context, PlayList.id);
       break;
     case 4:
-      Navigator.pushNamed(context, Settings.id);
-      break;
-    case 5:
       Navigator.pushNamed(context, About.id);
       break;
-    case 6:
+    case 5:
       Navigator.pushNamed(context, Header.id);
       break;
   }

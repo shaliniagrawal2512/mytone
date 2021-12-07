@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mytone/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Authenticate {
@@ -58,5 +60,21 @@ class Authenticate {
   Future<void> updateUserPassword(String password) async {
     final currentUser = FirebaseAuth.instance.currentUser;
     await currentUser!.updatePassword(password);
+  }
+
+  Future<void> deleteUser() async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    await currentUser!.delete();
+  }
+
+  Future<void> postDetailsToFirestore(String name) async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    FirebaseFirestore store = FirebaseFirestore.instance;
+    UserData userInfo = UserData();
+    userInfo.email = currentUser!.email;
+    userInfo.phoneNumber = currentUser.phoneNumber;
+    userInfo.name = name;
+    userInfo.uid = currentUser.uid;
+    await store.collection("users").doc(currentUser.uid).set(userInfo.toMap());
   }
 }

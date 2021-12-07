@@ -34,7 +34,9 @@ class _LoginScreenState extends State<LoginScreen> {
             .signInWithEmail(emailController.text, passwordController.text);
         if (result == 'success') {
           SharedPreferences prefs = await SharedPreferences.getInstance();
-          prefs.setString('phoneNumber', emailController.text);
+          prefs.setString('email', emailController.text);
+          emailController.text = '';
+          passwordController.text = '';
           Navigator.of(context, rootNavigator: true).pop();
           Navigator.pushReplacement(
               context,

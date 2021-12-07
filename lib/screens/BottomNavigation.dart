@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mytone/components/miniPlayer.dart';
 import 'package:mytone/constants.dart';
+import 'package:mytone/models/user.dart';
 import 'package:mytone/screens/SearchField.dart';
 import 'package:mytone/screens/homeScreen.dart';
 import 'package:mytone/screens/Library.dart';
@@ -16,6 +18,13 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
+  final currentUser = FirebaseAuth.instance.currentUser;
+  UserData loggedInUser = UserData();
+  @override
+  void initState() {
+    super.initState();
+  }
+
   int currentIndex = 0;
   final List<Widget> screens = [
     HomeScreen(),

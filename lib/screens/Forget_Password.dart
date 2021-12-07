@@ -35,6 +35,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           ),
         ),
       );
+      emailController.text = '';
     }
   }
 

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:mytone/constants.dart';
@@ -39,6 +38,9 @@ class _PhoneScreenState extends State<PhoneScreen> {
       if (authCred.user != null) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('phoneNumber', phoneController.text);
+        phoneController.text = '';
+        otpController.text = '';
+        usernameController.text = '';
         Navigator.of(context, rootNavigator: true).pop();
         Navigator.pushReplacement(
             context,
@@ -52,7 +54,6 @@ class _PhoneScreenState extends State<PhoneScreen> {
       setState(() {
         showSpinner = false;
       });
-      print(e.message);
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Some Error Occurred. Try Again Later')));
     }
@@ -117,6 +118,11 @@ class _PhoneScreenState extends State<PhoneScreen> {
                           verificationCompleted: (phoneAuthCredential) async {},
                           verificationFailed: (verificationFailed) {
                             print(verificationFailed);
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content:
+                                  Text('Some Error Occurred. Try Again Later'),
+                              duration: Duration(seconds: 7),
+                            ));
                           },
                           codeSent: (verificationID, resendingToken) async {
                             setState(() {

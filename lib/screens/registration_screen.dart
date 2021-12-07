@@ -32,8 +32,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         String result = await Authenticate()
             .signUpWithEmail(emailController.text, passwordController.text);
         if (result == 'success') {
+          Authenticate().postDetailsToFirestore(nameController.text);
           SharedPreferences prefs = await SharedPreferences.getInstance();
           prefs.setString('email', emailController.text);
+          emailController.text = '';
+          passwordController.text = '';
+          nameController.text = '';
           Navigator.of(context, rootNavigator: true).pop();
           Navigator.pushReplacement(
               context,
