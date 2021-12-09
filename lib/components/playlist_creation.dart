@@ -25,7 +25,7 @@ class PlayList extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Container(
-            height: 200,
+            height: 250,
             child: ListView.builder(
               itemCount: 5,
               scrollDirection: Axis.horizontal,

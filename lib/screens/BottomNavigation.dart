@@ -5,7 +5,7 @@ import 'package:mytone/constants.dart';
 import 'package:mytone/models/user.dart';
 import 'package:mytone/screens/SearchField.dart';
 import 'package:mytone/screens/homeScreen.dart';
-import 'package:mytone/screens/Library.dart';
+import 'package:mytone/screens/spotifyCharts.dart';
 import 'package:mytone/screens/profile.dart';
 import 'package:gradient_ui_widgets/gradient_ui_widgets.dart';
 import 'package:mytone/screens/slideSheet.dart';
@@ -29,7 +29,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   final List<Widget> screens = [
     HomeScreen(),
     SearchField(),
-    Library(),
+    TopCharts(region: 'Global'),
     Profile()
   ];
   Future<bool> _onBackPressed() async {
@@ -82,6 +82,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         drawer: NavigationDrawer(),
         backgroundColor: kBackgroundColor,
         appBar: AppBar(
+          elevation: 0,
           centerTitle: true,
           title: GradientText(
             "MyTone",

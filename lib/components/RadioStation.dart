@@ -11,7 +11,7 @@ class RadioStation extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 80,
-              backgroundImage: AssetImage('images/music4.jpg'),
+              backgroundImage: AssetImage('images/music8.jpg'),
             ),
             Text(
               'Bollywood Remix',

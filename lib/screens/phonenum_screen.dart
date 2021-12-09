@@ -6,6 +6,7 @@ import 'package:mytone/components/raised_buttons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mytone/screens/BottomNavigation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mytone/Services/authentication.dart';
 
 TextEditingController phoneController = TextEditingController();
 TextEditingController otpController = TextEditingController();
@@ -36,6 +37,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
       final authCred = await _auth.signInWithCredential(phoneAuthCredential);
 
       if (authCred.user != null) {
+        Authenticate().postDetailsToFirestore(usernameController.text);
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('phoneNumber', phoneController.text);
         phoneController.text = '';
@@ -51,6 +53,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
         });
       }
     } on FirebaseAuthException catch (e) {
+      print(e);
       setState(() {
         showSpinner = false;
       });
