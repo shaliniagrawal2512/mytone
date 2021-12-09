@@ -4,13 +4,21 @@ A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+# app overview:
+## registration/login
 
-A few resources to get you started if this is your first Flutter project:
+<a href="url"><img src="https://user-images.githubusercontent.com/76595515/145353524-25b2e254-64dd-49a5-b706-05426ad0eeec.png"  height="800" width="400" ></a>
+<a href="url"><img src="https://user-images.githubusercontent.com/76595515/145353588-01b02ad5-8c93-4f19-8e2c-6904e861105b.png"  height="800" width="400" ></a>
+<a href="url"><img src="https://user-images.githubusercontent.com/76595515/145353621-5aa84aa8-9801-4ed4-8c8e-0379d084472d.png"  height="800" width="400" ></a>
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## app ui
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<a href="url"><img src="https://user-images.githubusercontent.com/76595515/145353087-b66331f0-4378-4c78-9ad5-858f5c0f1138.png"  height="800" width="400" ></a>
+<a href="url"><img src="https://user-images.githubusercontent.com/76595515/145353154-5ef4f616-dcd5-4b26-96c5-28ee1f7f3c8d.png"  height="800" width="400" ></a>
+<a href="url"><img src="https://user-images.githubusercontent.com/76595515/145353189-0758cce5-0c8b-496b-a277-79020300c260.png"  height="800" width="400" ></a>
+<a href="url"><img src="https://user-images.githubusercontent.com/76595515/145353253-99651bf1-b6a2-4422-a2ae-971214120b90.png"  height="800" width="400" ></a>
+<a href="url"><img src="https://user-images.githubusercontent.com/76595515/145353297-aac97595-bb7d-45e5-b62d-e87b7ac5844f.png"  height="800" width="400" ></a>
+
+## music player
+
+<a href="url"><img src="https://user-images.githubusercontent.com/76595515/145353432-666d321c-6d80-4d30-b69f-0e0ef9c58769.png"  height="800" width="400" ></a>
