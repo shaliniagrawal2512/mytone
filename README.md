@@ -13,11 +13,13 @@ A new Flutter project.
 
 ## app ui
 
-<a href="url"><img src="https://user-images.githubusercontent.com/76595515/146158203-cc825f27-acfd-45b0-8db1-17b6b1f65be8.png"  height="800" width="400" ></a>
-<a href="url"><img src="https://user-images.githubusercontent.com/76595515/146158509-766fc44b-da32-4d19-8e6a-931afbbeea62.png"  height="800" width="400" ></a>
+<a href="url"><img src="https://user-images.githubusercontent.com/76595515/146158203-cc825f27-acfd-45b0-8db1-17b6b1f65be8.png"  height="600" width="300" ></a>
+<a href="url"><img src="https://user-images.githubusercontent.com/76595515/146158509-766fc44b-da32-4d19-8e6a-931afbbeea62.png"  height="600" width="300" ></a>
+<a href="url"><img src="https://user-images.githubusercontent.com/76595515/146158887-ee7c37cc-fdce-4e89-a1c3-2acc27907b92.png"  height="600" width="300" ></a>
 <a href="url"><img src="https://user-images.githubusercontent.com/76595515/145353189-0758cce5-0c8b-496b-a277-79020300c260.png"  height="800" width="400" ></a>
 <a href="url"><img src="https://user-images.githubusercontent.com/76595515/145353253-99651bf1-b6a2-4422-a2ae-971214120b90.png"  height="800" width="400" ></a>
 <a href="url"><img src="https://user-images.githubusercontent.com/76595515/145353297-aac97595-bb7d-45e5-b62d-e87b7ac5844f.png"  height="800" width="400" ></a>
+
 
 ## music player
 
