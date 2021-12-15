@@ -7,9 +7,9 @@ A new Flutter project.
 # app overview:
 ## registration/login
 
-<a href="url"><img src="https://user-images.githubusercontent.com/76595515/145353524-25b2e254-64dd-49a5-b706-05426ad0eeec.png"  height="800" width="400" ></a>
-<a href="url"><img src="https://user-images.githubusercontent.com/76595515/145353588-01b02ad5-8c93-4f19-8e2c-6904e861105b.png"  height="800" width="400" ></a>
-<a href="url"><img src="https://user-images.githubusercontent.com/76595515/145353621-5aa84aa8-9801-4ed4-8c8e-0379d084472d.png"  height="800" width="400" ></a>
+<a href="url"><img src="https://user-images.githubusercontent.com/76595515/146161298-31fa1304-f996-4866-9c4a-de8ac35c560c.png"  height="600" width="300" ></a>
+<a href="url"><img src="https://user-images.githubusercontent.com/76595515/146161400-ee417fda-8838-41c4-bce3-c1fea0204cbb.png"  height="600" width="300" ></a>
+<a href="url"><img src="https://user-images.githubusercontent.com/76595515/146161513-e0ae3682-982d-46bb-b18f-3798f2323c9b.png"  height="600" width="300" ></a>
 
 ## app ui
 
