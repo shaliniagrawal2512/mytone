@@ -22,7 +22,11 @@ A new Flutter project.
 <a href="url"><img src="https://user-images.githubusercontent.com/76595515/146159964-1f4a52ed-f21c-42eb-a737-5663d87d7218.png"  height="600" width="300" ></a>
 <a href="url"><img src="https://user-images.githubusercontent.com/76595515/146160137-5c6375c7-23f5-4277-b9df-3ef506cd8b75.png"  height="600" width="300" ></a>
 <a href="url"><img src="https://user-images.githubusercontent.com/76595515/146160274-15530de1-fd0d-4ded-acb5-a2ab78579038.png"  height="600" width="300" ></a>
+<a href="url"><img src="https://user-images.githubusercontent.com/76595515/146160502-75b88655-d52a-405f-ae8f-643135bdd8f4.png"  height="600" width="300" ></a>
+<a href="url"><img src="https://user-images.githubusercontent.com/76595515/146160274-15530de1-fd0d-4ded-acb5-a2ab78579038.png"  height="600" width="300" ></a>
+<a href="url"><img src="https://user-images.githubusercontent.com/76595515/146160274-15530de1-fd0d-4ded-acb5-a2ab78579038.png"  height="600" width="300" ></a>
+
 
 ## music player
 
-<a href="url"><img src="https://user-images.githubusercontent.com/76595515/145353432-666d321c-6d80-4d30-b69f-0e0ef9c58769.png"  height="800" width="400" ></a>
+
