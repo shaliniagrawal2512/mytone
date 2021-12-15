@@ -16,9 +16,9 @@ A new Flutter project.
 <a href="url"><img src="https://user-images.githubusercontent.com/76595515/146158203-cc825f27-acfd-45b0-8db1-17b6b1f65be8.png"  height="600" width="300" ></a>
 <a href="url"><img src="https://user-images.githubusercontent.com/76595515/146158509-766fc44b-da32-4d19-8e6a-931afbbeea62.png"  height="600" width="300" ></a>
 <a href="url"><img src="https://user-images.githubusercontent.com/76595515/146158887-ee7c37cc-fdce-4e89-a1c3-2acc27907b92.png"  height="600" width="300" ></a>
-<a href="url"><img src="https://user-images.githubusercontent.com/76595515/145353189-0758cce5-0c8b-496b-a277-79020300c260.png"  height="800" width="400" ></a>
-<a href="url"><img src="https://user-images.githubusercontent.com/76595515/145353253-99651bf1-b6a2-4422-a2ae-971214120b90.png"  height="800" width="400" ></a>
-<a href="url"><img src="https://user-images.githubusercontent.com/76595515/145353297-aac97595-bb7d-45e5-b62d-e87b7ac5844f.png"  height="800" width="400" ></a>
+<a href="url"><img src="https://user-images.githubusercontent.com/76595515/146159383-57ece59d-3a63-4ef9-93c5-157d31333938.png"  height="800" width="400" ></a>
+<a href="url"><img src="https://user-images.githubusercontent.com/76595515/146159487-40a8c349-6597-4875-8a87-0781f2f68804.png"  height="800" width="400" ></a>
+<a href="url"><img src="https://user-images.githubusercontent.com/76595515/146159650-6c9c3bc6-de8a-4dc0-b719-b1449c338524.png"  height="800" width="400" ></a>
 
 
 ## music player
