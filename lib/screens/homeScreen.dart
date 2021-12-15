@@ -15,15 +15,18 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final currentUser = FirebaseAuth.instance.currentUser;
   UserData loggedInUser = UserData();
+  String name = '';
   @override
   void initState() {
     super.initState();
+    print(FirebaseFirestore.instance.collection("users"));
     FirebaseFirestore.instance
         .collection("users")
         .doc(currentUser!.uid)
         .get()
         .then((value) async {
       this.loggedInUser = UserData.fromMap(value.data());
+      name = loggedInUser.name!;
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('name', loggedInUser.name!);
       setState(() {});
@@ -35,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text("Hello ${loggedInUser.name} !!!",
+          Text("Hello $name !!!",
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
           PlayList(title: 'Trending Now'),
           PlayList(title: 'Top Charts'),

@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mytone/components/miniPlayer.dart';
 import 'package:mytone/constants.dart';
 import 'package:mytone/models/user.dart';
-import 'package:mytone/screens/SearchField.dart';
+import 'package:mytone/screens/Library.dart';
+import 'package:mytone/screens/searchField.dart';
+import 'package:mytone/screens/YouTube.dart';
 import 'package:mytone/screens/homeScreen.dart';
 import 'package:mytone/screens/spotifyCharts.dart';
 import 'package:mytone/screens/profile.dart';
@@ -29,8 +32,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
   final List<Widget> screens = [
     HomeScreen(),
     SearchField(),
-    TopCharts(region: 'Global'),
-    Profile()
+    TopCharts(),
+    YouTubeHome(),
+    Library(),
+    Profile(),
   ];
   Future<bool> _onBackPressed() async {
     bool isExit = false;
@@ -115,6 +120,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
             BottomNavigationBarItem(icon: Icon(Icons.search), label: 'search'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.trending_up_rounded), label: 'Spotify Charts'),
+            BottomNavigationBarItem(
+                icon: Icon(MdiIcons.youtube), label: 'You Tube'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.folder_special_rounded), label: 'library'),
             BottomNavigationBarItem(

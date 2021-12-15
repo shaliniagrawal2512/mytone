@@ -15,8 +15,6 @@ import 'screens/playlist.dart';
 import 'screens/registration_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/phonenum_screen.dart';
-import 'screens/music_player_screen.dart';
-import 'screens/searchScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
@@ -55,9 +53,8 @@ class MyApp extends StatelessWidget {
             LoginScreen.id: (context) => LoginScreen(),
             RegistrationScreen.id: (context) => RegistrationScreen(),
             PhoneScreen.id: (context) => PhoneScreen(),
-            MusicPlayer.id: (context) => MusicPlayer(),
+            //MusicPlayer.id: (context) => MusicPlayer(),
             HomeScreen.id: (context) => HomeScreen(),
-            SearchScreen.id: (context) => SearchScreen(),
             BottomNavigation.id: (context) => BottomNavigation(),
             ForgotPassword.id: (context) => ForgotPassword(),
             MusicLibrary.id: (context) => MusicLibrary(),

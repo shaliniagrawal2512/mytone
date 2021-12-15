@@ -55,6 +55,7 @@ class Authenticate {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('email');
     prefs.remove('phoneNumber');
+    prefs.remove('name');
   }
 
   Future<void> updateUserPassword(String password) async {

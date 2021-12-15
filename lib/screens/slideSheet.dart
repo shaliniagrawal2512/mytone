@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_ui_widgets/text/gradient_text.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mytone/constants.dart';
 import 'package:mytone/screens/BottomNavigation.dart';
 import 'package:mytone/screens/downloads.dart';
@@ -16,7 +17,7 @@ class NavigationDrawer extends StatefulWidget {
 
 class _NavigationDrawerState extends State<NavigationDrawer> {
   String? emailPhone;
-  String? name;
+  String? name = '';
   @override
   initState() {
     super.initState();
@@ -42,11 +43,12 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         child: ListView(
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 40),
             children: [
-              buildHeader(
-                  urlImage: 'images/music5.jpeg',
-                  name: '$name',
-                  email: '$emailPhone',
-                  onClicked: () => selectedItem(context, 5)),
+              Container(
+                  child: buildHeader(
+                      urlImage: 'images/music5.jpeg',
+                      name: '$name',
+                      email: '$emailPhone',
+                      onClicked: () => selectedItem(context, 5))),
               drawerItem(
                   selected: true,
                   icon: Icons.home,
@@ -54,12 +56,12 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   onClicked: () => selectedItem(context, 0)),
               drawerItem(
                   selected: false,
-                  icon: Icons.my_library_music,
+                  icon: MdiIcons.folderMusic,
                   label: "My Music",
                   onClicked: () => selectedItem(context, 1)),
               drawerItem(
                   selected: false,
-                  icon: Icons.download_for_offline,
+                  icon: MdiIcons.download,
                   label: "Downloads",
                   onClicked: () => selectedItem(context, 2)),
               Divider(
@@ -67,7 +69,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               ),
               drawerItem(
                   selected: false,
-                  icon: Icons.playlist_add_check,
+                  icon: MdiIcons.playlistPlay,
                   label: "Playlists",
                   onClicked: () => selectedItem(context, 3)),
               drawerItem(
@@ -136,12 +138,14 @@ Widget buildHeader({
         child: Row(
           children: [
             CircleAvatar(radius: 30, backgroundImage: AssetImage(urlImage)),
-            SizedBox(width: 20),
-            Column(
+            SizedBox(width: 15),
+            Flexible(
+                child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 GradientText(
                   name,
+                  overflow: TextOverflow.ellipsis,
                   gradient: LinearGradient(
                     colors: [
                       Color(0xFFF9287B),
@@ -153,10 +157,11 @@ Widget buildHeader({
                 const SizedBox(height: 4),
                 Text(
                   email,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
               ],
-            ),
+            )),
           ],
         ),
       ),

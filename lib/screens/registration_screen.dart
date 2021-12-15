@@ -63,7 +63,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         child: Form(
           key: _formKey,
           child: Padding(
-            padding: const EdgeInsets.all(30.0),
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,

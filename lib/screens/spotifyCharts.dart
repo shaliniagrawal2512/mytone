@@ -3,19 +3,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:html_unescape/html_unescape_small.dart';
 import 'package:http/http.dart';
+import 'package:mytone/constants.dart';
 
 List items = [];
 List globalItems = [];
-List cachedItems = [];
-List cachedGlobalItems = [];
 bool fetched = false;
-bool emptyRegional = false;
-bool emptyGlobal = false;
 
 class TopCharts extends StatefulWidget {
-  final String region;
-  const TopCharts({Key? key, required this.region}) : super(key: key);
-
   @override
   _TopChartsState createState() => _TopChartsState();
 }
@@ -24,34 +18,32 @@ class _TopChartsState extends State<TopCharts> {
   bool get wantKeepAlive => true;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-        DefaultTabController(
-            length: 2, // length of tabs
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Container(
-                    child: TabBar(
-                      indicatorColor: Color(0xFF7E1CEA),
-                      tabs: [
-                        Tab(text: 'Local'),
-                        Tab(text: 'Global'),
-                      ],
-                    ),
-                  ),
-                  Container(
-                      height: 500,
-                      child: TabBarView(children: [
-                        TopPage(
-                          region: widget.region,
-                        ),
-                        const TopPage(
-                          region: 'global',
-                        ),
-                      ]))
-                ])),
-      ]),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        backgroundColor: kBackgroundColor,
+        appBar: AppBar(
+          elevation: 0,
+          leading: null,
+          leadingWidth: 0,
+          backgroundColor: kBackgroundColor,
+          title: TabBar(
+            indicatorColor: Color(0xFF7E1CEA),
+            tabs: [
+              Tab(text: 'Local'),
+              Tab(text: 'Global'),
+            ],
+          ),
+        ),
+        body: TabBarView(children: [
+          TopPage(
+            region: 'In',
+          ),
+          const TopPage(
+            region: 'global',
+          ),
+        ]),
+      ),
     );
   }
 }
@@ -78,7 +70,6 @@ Future<List> scrapData(String region) async {
       'region': region,
     };
   }).toList();
-  print(result);
   return result;
 }
 
@@ -92,13 +83,11 @@ class TopPage extends StatefulWidget {
 class _TopPageState extends State<TopPage>
     with AutomaticKeepAliveClientMixin<TopPage> {
   Future<void> getData(String region) async {
-    fetched = true;
-    final List temp = await scrapData(region);
-    final List temp2 = await scrapData("global");
-    print(temp);
-    print(temp2);
+    final List temp = await scrapData('in');
+    final List temp2 = await scrapData('global');
     globalItems = temp2;
     items = temp;
+    fetched = true;
     setState(() {});
   }
 
@@ -120,69 +109,75 @@ class _TopPageState extends State<TopPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final bool isGlobal = widget.region == 'global';
     if (!fetched) {
-      //getCachedData(widget.region);
       getData(widget.region);
     }
-
-    return globalItems.length <= 10
-        ? Expanded(
-            child: globalItems.isEmpty
-                ? EmptyScreen().emptyScreen(context, 0, ':( ', 100, 'ERROR', 60,
-                    'Service Unavailable', 20)
-                : Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                          height: MediaQuery.of(context).size.width / 7,
-                          width: MediaQuery.of(context).size.width / 7,
-                          child: const CircularProgressIndicator()),
-                    ],
-                  ),
-          )
-        : Expanded(
-            child: ListView.builder(
-            itemCount: globalItems.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                leading: Card(
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(7.0),
-                  ),
-                  clipBehavior: Clip.antiAlias,
-                  child: Stack(
-                    children: [
-                      const Image(
-                        image: AssetImage('images/cover.jpg'),
+    List showList = widget.region == 'global' ? globalItems : items;
+    return Column(
+      children: [
+        showList.length <= 10
+            ? Expanded(
+                child: fetched
+                    ? EmptyScreen().emptyScreen(context, 0, ':( ', 100, 'ERROR',
+                        60, 'Service Unavailable', 20)
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                              height: MediaQuery.of(context).size.width / 7,
+                              width: MediaQuery.of(context).size.width / 7,
+                              child: const CircularProgressIndicator()),
+                        ],
                       ),
-                      if (globalItems[index]['image'] != '')
-                        CachedNetworkImage(
-                          imageUrl: globalItems[index]['image'].toString(),
-                          errorWidget: (context, _, __) => const Image(
-                            image: AssetImage('images/cover.jpg'),
-                          ),
-                          placeholder: (context, url) => const Image(
-                            image: AssetImage('images/cover.jpg'),
-                          ),
+              )
+            : Expanded(
+                child: SingleChildScrollView(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: showList.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: Card(
+                        elevation: 5,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(7.0),
                         ),
-                    ],
-                  ),
+                        clipBehavior: Clip.antiAlias,
+                        child: Stack(
+                          children: [
+                            const Image(
+                              image: AssetImage('images/cover.jpg'),
+                            ),
+                            if (showList[index]['image'] != '')
+                              CachedNetworkImage(
+                                imageUrl: showList[index]['image'].toString(),
+                                errorWidget: (context, _, __) => const Image(
+                                  image: AssetImage('images/cover.jpg'),
+                                ),
+                                placeholder: (context, url) => const Image(
+                                  image: AssetImage('images/cover.jpg'),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                      title: Text(
+                        showList[index]['position'] == null
+                            ? '${showList[index]["title"]}'
+                            : '${showList[index]['position']}. ${showList[index]["title"]}',
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      subtitle: Text(
+                        '${showList[index]['artist']}',
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      onTap: () {},
+                    );
+                  },
                 ),
-                title: Text(
-                  globalItems[index]['position'] == null
-                      ? '${globalItems[index]["title"]}'
-                      : '${globalItems[index]['position']}. ${globalItems[index]["title"]}',
-                  overflow: TextOverflow.ellipsis,
-                ),
-                subtitle: Text(
-                  '${globalItems[index]['artist']}',
-                  overflow: TextOverflow.ellipsis,
-                ),
-                onTap: () {},
-              );
-            },
-          ));
+              )),
+      ],
+    );
   }
 }
