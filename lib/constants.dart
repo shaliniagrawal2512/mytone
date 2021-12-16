@@ -39,14 +39,13 @@ const kInputDecoration = InputDecoration(
 
 const kSearchFieldDecoration = InputDecoration(
   filled: true,
-  fillColor: Color(0xFF36274A),
-  // focusColor: Colors.blue,
-  prefixIcon: Icon(Icons.search, color: Colors.white),
+  fillColor: Color(0xFF421452),
+  prefixIcon: null,
   suffixIcon: IconTheme(
     data: IconThemeData(color: Colors.white),
     child: IconButton(
       icon: Icon(
-        Icons.clear,
+        Icons.search,
         color: Colors.white,
       ),
       onPressed: null,

@@ -3,15 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_ui_widgets/text/gradient_text.dart';
 import 'package:mytone/Services/youtubeServices.dart';
+import 'package:mytone/screens/YouTubeSearchPage.dart';
 import 'package:mytone/screens/playlistScreen.dart';
-import 'package:mytone/screens/spotifyCharts.dart';
-
 import '../constants.dart';
 
 List showList = [];
 List pageList = [];
-
-bool isFetched = false;
+TextEditingController searchController = TextEditingController();
+bool fetched = false;
 
 class YouTubeHome extends StatefulWidget {
   const YouTubeHome({Key? key}) : super(key: key);
@@ -52,7 +51,8 @@ class _YouTubeHomeState extends State<YouTubeHome> {
             context,
             MaterialPageRoute(
               builder: (BuildContext context) {
-                return Container();
+                return YouTubeSearch(
+                    query: pageList[index]['title'].toString());
               },
             ),
           );
@@ -60,7 +60,7 @@ class _YouTubeHomeState extends State<YouTubeHome> {
         child: CachedNetworkImage(
           fit: BoxFit.cover,
           errorWidget: (context, _, __) =>
-              const Image(image: AssetImage('assets/cover.jpg')),
+              const Image(image: AssetImage('images/cover.jpg')),
           imageUrl: pageList[index]['image'].toString(),
           imageBuilder: (context, imageProvider) => Container(
               width: 270.0,
@@ -88,7 +88,7 @@ class _YouTubeHomeState extends State<YouTubeHome> {
                   context,
                   MaterialPageRoute(
                     builder: (BuildContext context) {
-                      return Container();
+                      return YouTubeSearch(query: item['title'].toString());
                     },
                   ),
                 )
@@ -152,25 +152,53 @@ class _YouTubeHomeState extends State<YouTubeHome> {
   @override
   Widget build(BuildContext context) {
     final double boxSize = MediaQuery.of(context).size.height;
-    TextEditingController searchController = TextEditingController();
     return Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(children: [
           TextField(
+              onChanged: (value) {
+                setState(() {});
+              },
               keyboardType: TextInputType.url,
               controller: searchController,
               decoration: kSearchFieldDecoration.copyWith(
+                  prefixIcon: null,
                   hintText: 'Search on Youtube',
                   suffixIcon: IconTheme(
                       data: IconThemeData(color: Colors.white),
-                      child: IconButton(
-                          icon: Icon(
-                            Icons.clear,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {
-                            searchController.text = "";
-                          })))),
+                      child: Container(
+                        width: 100,
+                        child: Row(
+                          children: [
+                            searchController.text.length >= 1
+                                ? IconButton(
+                                    icon: Icon(
+                                      Icons.clear,
+                                      color: Colors.white,
+                                    ),
+                                    onPressed: () {
+                                      searchController.clear();
+                                    })
+                                : Icon(Icons.clear, color: Colors.grey),
+                            IconButton(
+                                icon: Icon(
+                                  Icons.search,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (BuildContext context) {
+                                        return YouTubeSearch(
+                                            query: searchController.text);
+                                      },
+                                    ),
+                                  );
+                                })
+                          ],
+                        ),
+                      )))),
           Expanded(
             child: SingleChildScrollView(
                 child: Column(children: [
@@ -195,7 +223,6 @@ class _YouTubeHomeState extends State<YouTubeHome> {
                     padding: EdgeInsets.only(top: 10),
                     itemCount: showList.length,
                     physics: const BouncingScrollPhysics(),
-                    //physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return Column(

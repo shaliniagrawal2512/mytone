@@ -18,6 +18,11 @@ class YoutubeService {
     return res;
   }
 
+  Future<List<Video>> fetchSearchResults(String query) async {
+    final List<Video> searchResults = await yt.search.getVideos(query);
+    return searchResults;
+  }
+
   Future<void> getStream() async {
     var yt = YoutubeExplode();
     var streamInfo = await yt.videos.streamsClient.getManifest('fRh_vgS2dFE');
