@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:mytone/Services/youtubeServices.dart';
 import 'package:mytone/components/EmptyScreen.dart';
 import 'package:mytone/constants.dart';
@@ -72,10 +73,10 @@ class _YouTubeSearchState extends State<YouTubeSearch> {
               CachedNetworkImage(
                 fit: BoxFit.cover,
                 errorWidget: (context, _, __) =>
-                    const Image(image: AssetImage('images/cover.jpg')),
+                    const Image(image: AssetImage('images/ytCover.jpg')),
                 imageUrl: searchedList[index].thumbnails.maxResUrl,
                 placeholder: (context, url) => const Image(
-                  image: AssetImage('images/cover.jpg'),
+                  image: AssetImage('images/ytCover.jpg'),
                 ),
               ),
               Padding(
@@ -119,26 +120,31 @@ class _YouTubeSearchState extends State<YouTubeSearch> {
     }
     return Scaffold(
         appBar: AppBar(
+          elevation: 0,
           backgroundColor: kBackgroundColor,
-          leadingWidth: 15,
+          leadingWidth: 0,
+          leading: Container(color: kBackgroundColor),
           title: TextField(
               controller: _controller,
               decoration: kSearchFieldDecoration.copyWith(
-                  suffixIcon: IconTheme(
-                      data: IconThemeData(color: Colors.white),
-                      child: IconButton(
-                          icon: Icon(
-                            Icons.search,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {
-                            if (_controller.text != widget.query &&
-                                _controller.text.length >= 1) {
-                              fetched = false;
-                              searchedList.clear();
-                              setState(() {});
-                            }
-                          })))),
+                  prefixIcon: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(MdiIcons.arrowLeft, color: Colors.white)),
+                  suffixIcon: IconButton(
+                      icon: Icon(
+                        Icons.search,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        if (_controller.text != widget.query &&
+                            _controller.text.length >= 1) {
+                          fetched = false;
+                          searchedList.clear();
+                          setState(() {});
+                        }
+                      }))),
         ),
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),

@@ -139,11 +139,13 @@ class OtherButton extends StatelessWidget {
   final IconData? iconData;
   final Function onPressed;
   final double radius;
+  final Color? color;
   final double iconSize;
   OtherButton(
       {required this.iconSize,
       required this.radius,
       this.iconData,
+      this.color,
       required this.onPressed});
   @override
   Widget build(BuildContext context) {
@@ -155,7 +157,7 @@ class OtherButton extends StatelessWidget {
         icon: Icon(
           iconData,
         ),
-        color: Colors.white,
+        color: color == null ? Colors.white : color,
         onPressed: onPressed as void Function()?,
       ),
     );

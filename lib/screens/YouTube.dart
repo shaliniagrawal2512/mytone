@@ -7,11 +7,6 @@ import 'package:mytone/screens/YouTubeSearchPage.dart';
 import 'package:mytone/screens/playlistScreen.dart';
 import '../constants.dart';
 
-List showList = [];
-List pageList = [];
-TextEditingController searchController = TextEditingController();
-bool fetched = false;
-
 class YouTubeHome extends StatefulWidget {
   const YouTubeHome({Key? key}) : super(key: key);
 
@@ -20,6 +15,10 @@ class YouTubeHome extends StatefulWidget {
 }
 
 class _YouTubeHomeState extends State<YouTubeHome> {
+  List showList = [];
+  List pageList = [];
+  TextEditingController searchController = TextEditingController();
+  bool fetched = false;
   @override
   void initState() {
     super.initState();
@@ -60,7 +59,7 @@ class _YouTubeHomeState extends State<YouTubeHome> {
         child: CachedNetworkImage(
           fit: BoxFit.cover,
           errorWidget: (context, _, __) =>
-              const Image(image: AssetImage('images/cover.jpg')),
+              const Image(image: AssetImage('images/ytCover.jpg')),
           imageUrl: pageList[index]['image'].toString(),
           imageBuilder: (context, imageProvider) => Container(
               width: 270.0,
@@ -71,7 +70,7 @@ class _YouTubeHomeState extends State<YouTubeHome> {
                 image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
               )),
           placeholder: (context, url) => const Image(
-            image: AssetImage('images/cover.jpg'),
+            image: AssetImage('images/ytCover.jpg'),
           ),
         ),
       ),
@@ -110,13 +109,13 @@ class _YouTubeHomeState extends State<YouTubeHome> {
                 fit: BoxFit.cover,
                 errorWidget: (context, _, __) => Image(
                   image: item['type'] != 'playlist'
-                      ? const AssetImage('images/cover.jpg')
+                      ? const AssetImage('images/ytCover.jpg')
                       : const AssetImage('images/album.jpg'),
                 ),
                 imageUrl: item['image'].toString(),
                 placeholder: (context, url) => Image(
                   image: item['type'] != 'playlist'
-                      ? const AssetImage('images/cover.jpg')
+                      ? const AssetImage('images/ytCover.jpg')
                       : const AssetImage('images/album.jpg'),
                 ),
                 imageBuilder: (context, imageProvider) => Container(
@@ -178,6 +177,7 @@ class _YouTubeHomeState extends State<YouTubeHome> {
                                     ),
                                     onPressed: () {
                                       searchController.clear();
+                                      setState(() {});
                                     })
                                 : Icon(Icons.clear, color: Colors.grey),
                             IconButton(

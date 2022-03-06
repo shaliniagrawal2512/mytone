@@ -7,6 +7,7 @@ import 'package:mytone/screens/downloads.dart';
 import 'package:mytone/screens/header.dart';
 import 'package:mytone/screens/homeScreen.dart';
 import 'package:mytone/screens/music_library.dart';
+import 'package:mytone/screens/profile.dart';
 import 'package:mytone/screens/top_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -62,7 +63,8 @@ class MyApp extends StatelessWidget {
             Downloads.id: (context) => Downloads(),
             Header.id: (context) => Header(),
             PlayList.id: (context) => PlayList(),
-            ChangePassword.id: (context) => ChangePassword()
+            ChangePassword.id: (context) => ChangePassword(),
+            Profile.id: (context) => Profile()
           },
         ));
   }

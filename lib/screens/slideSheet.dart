@@ -7,6 +7,7 @@ import 'package:mytone/screens/downloads.dart';
 import 'package:mytone/screens/header.dart';
 import 'package:mytone/screens/music_library.dart';
 import 'package:mytone/screens/playlist.dart';
+import 'package:mytone/screens/profile.dart';
 import 'about.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -72,6 +73,13 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   icon: MdiIcons.playlistPlay,
                   label: "Playlists",
                   onClicked: () => selectedItem(context, 3)),
+              // BottomNavigationBarItem(
+              //     icon: Icon(Icons.ac_unit_sharp), label: 'profile')
+              drawerItem(
+                  selected: false,
+                  icon: MdiIcons.faceProfile,
+                  label: "Profile",
+                  onClicked: () => selectedItem(context, 6)),
               drawerItem(
                   selected: false,
                   icon: Icons.info,
@@ -121,6 +129,9 @@ void selectedItem(BuildContext context, int index) {
       break;
     case 5:
       Navigator.pushNamed(context, Header.id);
+      break;
+    case 6:
+      Navigator.pushNamed(context, Profile.id);
       break;
   }
 }

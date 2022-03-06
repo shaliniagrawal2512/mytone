@@ -31,11 +31,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
   int currentIndex = 0;
   final List<Widget> screens = [
     HomeScreen(),
-    SearchField(),
+    SearchField(query: ''),
     TopCharts(),
     YouTubeHome(),
     Library(),
-    Profile(),
   ];
   Future<bool> _onBackPressed() async {
     bool isExit = false;
@@ -125,9 +124,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
             BottomNavigationBarItem(
                 icon: Icon(MdiIcons.youtube), label: 'You Tube'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.folder_special_rounded), label: 'library'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.ac_unit_sharp), label: 'profile')
+                icon: Icon(Icons.folder_special_rounded), label: 'library')
           ],
         ),
       ),

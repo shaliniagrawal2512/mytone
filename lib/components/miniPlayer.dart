@@ -44,12 +44,15 @@ class MiniPlayer extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: CustomSlider(
-                inactiveTrackHeight: 2,
-                thumbIconSize: 5,
-                trackHeight: 2.5,
-                handlerHeight: 8,
-              ),
+              // child: CustomSlider(
+              //   onDragging: () {},
+              //   thumbValue: 30,
+              //   max: 100,
+              //   inactiveTrackHeight: 2,
+              //   thumbIconSize: 5,
+              //   trackHeight: 2.5,
+              //   handlerHeight: 8,
+              // ),
             )
           ],
         ),
