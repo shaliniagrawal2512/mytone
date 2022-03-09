@@ -9,7 +9,6 @@ import 'package:mytone/screens/searchField.dart';
 import 'package:mytone/screens/YouTube.dart';
 import 'package:mytone/screens/homeScreen.dart';
 import 'package:mytone/screens/spotifyCharts.dart';
-import 'package:mytone/screens/profile.dart';
 import 'package:gradient_ui_widgets/gradient_ui_widgets.dart';
 import 'package:mytone/screens/slideSheet.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -102,7 +101,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         ),
         body: Column(children: [
           Expanded(child: IndexedStack(index: currentIndex, children: screens)),
-          MiniPlayer()
+          // MiniPlayer()
         ]),
         bottomNavigationBar: BottomNavigationBar(
           showUnselectedLabels: false,

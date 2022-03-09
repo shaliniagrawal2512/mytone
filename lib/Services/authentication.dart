@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Authenticate {
   Future<String> signInWithEmail(String email, String password) async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
+      await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       return 'success';
     } on FirebaseAuthException catch (e) {
@@ -21,7 +21,6 @@ class Authenticate {
 
   Future<String> signUpWithEmail(String email, String password) async {
     try {
-      UserCredential userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,

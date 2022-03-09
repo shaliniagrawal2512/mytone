@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mytone/components/customSlider.dart';
 import 'package:mytone/screens/music_player_screen.dart';
 
 class MiniPlayer extends StatelessWidget {

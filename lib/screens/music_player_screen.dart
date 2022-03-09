@@ -103,8 +103,8 @@ class _MusicPlayerState extends State<MusicPlayer> {
             ],
                 colors: [
               //
-              Color(0xff7E1CEA),
-              Color(0xff5711AE),
+              Color(0xcc7e1cea),
+              Color(0xcc5711ae),
               kBackgroundColor,
               Color(0x80F9287B),
             ])),

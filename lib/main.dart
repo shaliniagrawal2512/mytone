@@ -54,7 +54,6 @@ class MyApp extends StatelessWidget {
             LoginScreen.id: (context) => LoginScreen(),
             RegistrationScreen.id: (context) => RegistrationScreen(),
             PhoneScreen.id: (context) => PhoneScreen(),
-            //MusicPlayer.id: (context) => MusicPlayer(),
             HomeScreen.id: (context) => HomeScreen(),
             BottomNavigation.id: (context) => BottomNavigation(),
             ForgotPassword.id: (context) => ForgotPassword(),
@@ -64,7 +63,7 @@ class MyApp extends StatelessWidget {
             Header.id: (context) => Header(),
             PlayList.id: (context) => PlayList(),
             ChangePassword.id: (context) => ChangePassword(),
-            Profile.id: (context) => Profile()
+            Profile.id: (context) => Profile(),
           },
         ));
   }
