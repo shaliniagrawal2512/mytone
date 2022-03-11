@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_ui_widgets/gradient_ui_widgets.dart';
+import 'package:mytone/screens/jio_playlist.dart';
 
 class PlayList extends StatelessWidget {
   PlayList({required this.title, this.data});
@@ -35,7 +36,13 @@ class PlayList extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.only(right: 8.0),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => JioPlaylist(
+                                  listItem: data[index],)));
+                    },
                     child: SizedBox(
                       width: 200,
                       child: Column(

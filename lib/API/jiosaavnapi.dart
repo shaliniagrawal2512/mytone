@@ -45,29 +45,8 @@ class SaavnAPI {
       return res.statusCode.toString();
     }
   }
-  // if (!usev4) {
-  //   url = Uri.https(
-  //       baseUrl, '$apiStr&$params'.replaceAll('&api_version=4', ''));
-  // } else {
-  //   url = Uri.https(baseUrl, '$apiStr&$params');
-  // }
-  // preferredLanguages =
-  //     preferredLanguages.map((lang) => lang.toLowerCase()).toList();
-  // final String languageHeader = 'L=${preferredLanguages.join('%2C')}';
-  // headers = {'cookie': languageHeader, 'Accept': '*/*'};
-  //
-  // final HttpClient httpClient = HttpClient();
-  // httpClient.findProxy = (uri) {
-  //   return "hello";
-  // };
-  // httpClient.badCertificateCallback =
-  //     (X509Certificate cert, String host, int port) => Platform.isAndroid;
-  // final IOClient myClient = IOClient(httpClient);
-  // return myClient.get(url, headers: headers);
 
   fetchHomePageData() async {
-    // Map result = {};
-    // try {
     final res = await get(Uri.parse(
         "https://www.jiosaavn.com/api.php?_format=json&_marker=0&api_version=4&ctx=web6dot0&__call=webapi.getLaunchData"));
     if (res.statusCode == 200) {
@@ -76,6 +55,51 @@ class SaavnAPI {
     } else {
       return res.statusCode.toString();
     }
+  }
+
+  Future<List> fetchPlaylistSongs(String playlistId) async {
+    final String url =
+        'https://www.jiosaavn.com/api.php?_format=json&_marker=0&api_version=4&ctx=web6dot0&__call=playlist.getDetails&cc=in&listid=$playlistId';
+    final res = await get(Uri.parse(url));
+    if (res.statusCode == 200) {
+      final getMain = json.decode(res.body);
+      final List responseList = getMain['list'] as List;
+      List<dynamic> result =
+          await FormatResponse().formatSongsResponse(responseList, 'playlist');
+      return result;
+    }
+    return List.empty();
+  }
+
+  Future<List> fetchAlbumSongs(String albumId) async {
+    final String url =
+        'https://www.jiosaavn.com/api.php?_format=json&_marker=0&api_version=4&ctx=web6dot0&__call=content.getAlbumDetails&cc=in&albumid=$albumId';
+    final res = await get(Uri.parse(url));
+    if (res.statusCode == 200) {
+      final getMain = json.decode(res.body);
+      final List responseList = getMain['list'] as List;
+      return FormatResponse().formatSongsResponse(responseList, 'album');
+    }
+    return List.empty();
+  }
+
+  Future<List> fetchSongSearchResults(String searchQuery, String count) async {
+    final String url =
+        "https://www.jiosaavn.com/api.php?_format=json&_marker=0&api_version=4&ctx=web6dot0&p=1&q=$searchQuery&n=$count&__call=search.getResults";
+    print(url);
+    try {
+      final res = await get(Uri.parse(url));
+      if (res.statusCode == 200) {
+        final Map getMain = json.decode(res.body) as Map;
+        print(getMain);
+        final List responseList = getMain['results'] as List;
+        List<dynamic> result =
+            await FormatResponse().formatSongsResponse(responseList, 'song');
+        print(result);
+        return result;
+      }
+    } catch (e) {}
+    return List.empty();
   }
 
   Future<Map> getSongFromToken(String token, String type) async {
@@ -152,23 +176,6 @@ class SaavnAPI {
       }
     } catch (e) {
       log('Error in getTopSearches: $e');
-    }
-    return List.empty();
-  }
-
-  Future<List> fetchSongSearchResults(String searchQuery, String count) async {
-    final String params =
-        "p=1&q=$searchQuery&n=$count&${endpoints['getResult']}";
-
-    try {
-      final res = await getResponse(params, useProxy: true);
-      if (res.statusCode == 200) {
-        final Map getMain = json.decode(res.body) as Map;
-        final List responseList = getMain['results'] as List;
-        return await FormatResponse().formatSongsResponse(responseList, 'song');
-      }
-    } catch (e) {
-      log('Error in fetchSongSearchResults: $e');
     }
     return List.empty();
   }
@@ -288,17 +295,6 @@ class SaavnAPI {
     return List.empty();
   }
 
-  Future<List> fetchAlbumSongs(String albumId) async {
-    final String params = '${endpoints['albumDetails']}&cc=in&albumid=$albumId';
-    final res = await getResponse(params);
-    if (res.statusCode == 200) {
-      final getMain = json.decode(res.body);
-      final List responseList = getMain['list'] as List;
-      return FormatResponse().formatSongsResponse(responseList, 'album');
-    }
-    return List.empty();
-  }
-
   Future<Map<String, List>> fetchArtistSongs(String artistToken) async {
     final Map<String, List> data = {};
     final String params =
@@ -321,18 +317,6 @@ class SaavnAPI {
       }
     }
     return data;
-  }
-
-  Future<List> fetchPlaylistSongs(String playlistId) async {
-    final String params =
-        '${endpoints["playlistDetails"]}&cc=in&listid=$playlistId';
-    final res = await getResponse(params);
-    if (res.statusCode == 200) {
-      final getMain = json.decode(res.body);
-      final List responseList = getMain['list'] as List;
-      return FormatResponse().formatSongsResponse(responseList, 'playlist');
-    }
-    return List.empty();
   }
 
   Future<List> fetchTopSearchResult(String searchQuery) async {

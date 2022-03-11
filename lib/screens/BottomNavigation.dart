@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:mytone/components/miniPlayer.dart';
 import 'package:mytone/constants.dart';
 import 'package:mytone/models/user.dart';
 import 'package:mytone/screens/Library.dart';
